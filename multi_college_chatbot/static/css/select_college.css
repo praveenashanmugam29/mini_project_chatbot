@@ -1,0 +1,42 @@
+/*
+  select_college.css
+  ------------------
+  College selection card grid.
+*/
+
+.college-card{
+  text-align: left;
+  padding: 22px;
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+}
+.college-card:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.24);
+}
+.college-icon{
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(45,125,255,0.30), rgba(0,212,255,0.18));
+  border: 1px solid rgba(255,255,255,0.14);
+  font-size: 22px;
+}
+.college-name{
+  font-weight: 800;
+  font-size: 18px;
+  margin-top: 14px;
+}
+.college-full{
+  font-size: 12px;
+  margin-top: 6px;
+}
+.college-cta{
+  margin-top: 16px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+}
+

@@ -1,0 +1,53 @@
+{#
+  sidebar.html
+  -----------
+  Reusable sidebar navigation (ChatGPT-like layout feel).
+#}
+<aside class="app-sidebar">
+  <div class="sidebar-header">
+    <a class="brand d-flex align-items-center gap-2" href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Logo" class="sidebar-logo" />
+      <div>
+        <div class="brand-name">Sri Shanmugha</div>
+        <div class="brand-sub">Institutions</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="sidebar-user">
+    <div class="avatar"><i class="fa-solid fa-user"></i></div>
+    <div class="user-meta">
+      <div class="user-name">{{ session.get('display_name', 'User') }}</div>
+      <div class="user-type text-muted small">{{ (session.get('user_type') or '').replace('_',' ').title() }}</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-item" href="{{ url_for('select_college') }}">
+      <i class="fa-solid fa-building-columns"></i>
+      <span>Select College</span>
+    </a>
+    <a class="nav-item" href="{{ url_for('dashboard') }}">
+      <i class="fa-solid fa-grid-2"></i>
+      <span>Dashboard</span>
+    </a>
+    <a class="nav-item" href="{{ url_for('chat') }}">
+      <i class="fa-solid fa-comments"></i>
+      <span>Chat With Us</span>
+    </a>
+    <a class="nav-item" href="#" data-open-enquiry>
+      <i class="fa-solid fa-pen-to-square"></i>
+      <span>Enquiry Form</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a class="btn btn-outline-light w-100" href="{{ url_for('logout') }}">
+      <i class="fa-solid fa-right-from-bracket me-2"></i>Logout
+    </a>
+    <div class="small text-muted mt-3">
+      <i class="fa-solid fa-circle-dot me-2"></i>AI Enquiry Assistant
+    </div>
+  </div>
+</aside>
+

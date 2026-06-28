@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | {{ college.short_name }}{% endblock %}
+
+{% block head_extra %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+{% endblock %}
+
+{% block body %}
+  <div class="app-shell">
+    {% include "sidebar.html" %}
+
+    <main class="app-main">
+      <div class="hero">
+        <div class="container py-4">
+
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+
+            <div data-aos="fade-up">
+              <div class="hero-eyebrow">
+                <i class="fa-solid fa-sparkles me-2"></i>
+                College Overview
+              </div>
+
+              <h1 class="hero-title mb-1">
+                {{ college.name }}
+              </h1>
+
+              <div class="hero-sub text-muted">
+                Explore infrastructure, courses, hostel, placements and chat instantly with our enquiry assistant.
+              </div>
+            </div>
+
+            <div class="d-flex gap-2" data-aos="fade-left">
+              <a class="btn btn-primary btn-glow" href="{{ url_for('chat') }}">
+                <i class="fa-solid fa-comments me-2"></i>
+                Chat With Us
+              </a>
+
+              <button class="btn btn-outline-light" data-open-enquiry>
+                <i class="fa-solid fa-pen-to-square me-2"></i>
+                Enquiry
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Metrics -->
+          <div class="row g-3 mt-3">
+
+            <div class="col-md-6 col-xl-3" data-aos="zoom-in" data-aos-delay="50">
+              <div class="metric-card glass">
+                <div class="metric-icon">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <div class="metric-value">
+                  {{ details.get('students_text', '1000+') }}
+                </div>
+
+                <div class="metric-label text-muted">
+                  Students
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3" data-aos="zoom-in" data-aos-delay="120">
+              <div class="metric-card glass">
+                <div class="metric-icon">
+                  <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+
+                <div class="metric-value">
+                  {{ details.get('faculty_text', 'Experienced') }}
+                </div>
+
+                <div class="metric-label text-muted">
+                  Faculty
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3" data-aos="zoom-in" data-aos-delay="180">
+              <div class="metric-card glass">
+                <div class="metric-icon">
+                  <i class="fa-solid fa-building"></i>
+                </div>
+
+                <div class="metric-value">
+                  {{ details.get('campus_text', 'Modern Campus') }}
+                </div>
+
+                <div class="metric-label text-muted">
+                  Infrastructure
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3" data-aos="zoom-in" data-aos-delay="250">
+              <div class="metric-card glass">
+                <div class="metric-icon">
+                  <i class="fa-solid fa-briefcase"></i>
+                </div>
+
+                <div class="metric-value">
+                  {{ details.get('placements_text', 'Strong') }}
+                </div>
+
+                <div class="metric-label text-muted">
+                  Placements
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="container py-4">
+
+        <!-- Introduction -->
+        <section class="section" data-aos="fade-up">
+
+          <div class="section-title">
+            <h2>College Introduction</h2>
+
+            <div class="text-muted">
+              A quick overview of who we are
+            </div>
+          </div>
+
+          <div class="glass section-card">
+            <p class="mb-0">
+              {{ details.get('intro_text', 'Welcome to our institution. We provide quality education with strong practical training and career guidance.') }}
+            </p>
+          </div>
+
+        </section>
+
+        <!-- Infrastructure -->
+        <section class="section" data-aos="fade-up">
+
+          <div class="section-title">
+            <h2>Infrastructure & Labs</h2>
+
+            <div class="text-muted">
+              Smart classrooms, labs, library and modern facilities
+            </div>
+          </div>
+
+          <div class="row g-3">
+
+            <div class="col-lg-7">
+              <div class="glass section-card h-100">
+                <p class="mb-0">
+                  {{ details.get('infrastructure_text', 'Our campus features well-equipped labs, smart classrooms, seminar halls and a central library to support student learning.') }}
+                </p>
+              </div>
+            </div>
+
+            <div class="col-lg-5">
+              <div class="glass section-card h-100">
+
+                <div class="mini-list">
+
+                  <div class="mini-item">
+                    <i class="fa-solid fa-wifi"></i>
+                    Wi-Fi Enabled Campus
+                  </div>
+
+                  <div class="mini-item">
+                    <i class="fa-solid fa-book"></i>
+                    Modern Library
+                  </div>
+
+                  <div class="mini-item">
+                    <i class="fa-solid fa-vials"></i>
+                    Advanced Labs
+                  </div>
+
+                  <div class="mini-item">
+                    <i class="fa-solid fa-person-chalkboard"></i>
+                    Smart Classrooms
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Courses -->
+        <section class="section" data-aos="fade-up">
+
+          <div class="section-title">
+            <h2>Courses Offered</h2>
+
+            <div class="text-muted">
+              Program list
+            </div>
+          </div>
+
+          <div class="glass section-card">
+
+            <div class="row g-2">
+
+              {% for c in courses %}
+                <div class="col-md-6 col-lg-4">
+
+                  <div class="course-pill">
+                    <i class="fa-solid fa-circle-check me-2"></i>
+                    {{ c }}
+                  </div>
+
+                </div>
+              {% endfor %}
+
+              {% if courses|length == 0 %}
+                <div class="text-muted">
+                  No courses found. Please update college details in MySQL.
+                </div>
+              {% endif %}
+
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Placements -->
+        <section class="section" data-aos="fade-up">
+
+          <div class="section-title">
+            <h2>Placements</h2>
+
+            <div class="text-muted">
+              Career support, training and recruiter network
+            </div>
+          </div>
+
+          <div class="glass section-card">
+
+            <p class="mb-2">
+              {{ details.get('placements_detail_text', 'We provide placement training, aptitude coaching and interview preparation. Our placement cell supports internships and final placements.') }}
+            </p>
+
+            <div class="chips">
+              <span class="chip">TCS</span>
+              <span class="chip">Wipro</span>
+              <span class="chip">Infosys</span>
+              <span class="chip">HCL</span>
+              <span class="chip">Hospitals / Pharma Partners</span>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Hostel -->
+        <section class="section" data-aos="fade-up">
+
+          <div class="section-title">
+            <h2>Hostel</h2>
+
+            <div class="text-muted">
+              Safe accommodation for boys and girls
+            </div>
+          </div>
+
+          <div class="glass section-card">
+
+            <p class="mb-0">
+              {{ details.get('hostel_text', 'Hostel facilities include clean rooms, study area, dining, security, food facilities and transport support for students.') }}
+            </p>
+
+          </div>
+
+        </section>
+
+        <!-- Ready To Join -->
+        <section class="section" data-aos="zoom-in">
+
+          <div class="cta glass">
+
+            <div>
+              <h2 class="mb-1">
+                Ready to Join Us?
+              </h2>
+
+              <div class="text-muted">
+                Chat with our assistant or send an enquiry form.
+              </div>
+            </div>
+
+            <div class="d-flex gap-2 flex-wrap">
+
+              <a class="btn btn-primary btn-glow" href="{{ url_for('chat') }}">
+                <i class="fa-solid fa-comments me-2"></i>
+                Chat With Us
+              </a>
+
+              <button class="btn btn-outline-light" data-open-enquiry>
+                <i class="fa-solid fa-pen-to-square me-2"></i>
+                Enquiry Form
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  {% include "enquiry_modal.html" %}
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/enquiry.js') }}"></script>
+{% endblock %}
+

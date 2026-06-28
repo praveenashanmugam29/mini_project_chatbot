@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block title %}Visitor Login | {{ institution }}{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+{% endblock %}
+
+{% block body %}
+<div class="login-page">
+
+  <!-- Animated Background -->
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row justify-content-center align-items-center">
+
+      <!-- Left Side -->
+      <div class="col-lg-5 mb-4" data-aos="fade-right">
+        <div class="brand-card glass">
+          
+          <div class="d-flex align-items-center gap-3">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}"
+                 class="brand-logo"
+                 alt="Institution Logo" />
+
+            <div>
+              <div class="brand-title">{{ institution }}</div>
+              <div class="brand-subtitle">
+                College Enquiry Chatbot System
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 brand-points">
+            <div class="point">
+              <i class="fa-solid fa-comments"></i>
+              Ask college-related doubts instantly
+            </div>
+
+            <div class="point">
+              <i class="fa-solid fa-robot"></i>
+              AI-like chatbot support
+            </div>
+
+            <div class="point">
+              <i class="fa-solid fa-image"></i>
+              Hostel & campus image responses
+            </div>
+
+            <div class="point">
+              <i class="fa-solid fa-mobile-screen"></i>
+              Mobile-friendly modern UI
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Visitor Login -->
+      <div class="col-lg-5" data-aos="fade-left">
+        <div class="login-card glass">
+
+          <div class="text-center mb-4">
+            <h2>Visitor / Parent Access</h2>
+            <div class="text-muted small">
+              Enter your details to continue
+            </div>
+          </div>
+
+          <form method="POST" action="{{ url_for('login') }}">
+
+            <input type="hidden" name="user_type" value="visitor" />
+
+            <!-- Name -->
+            <div class="mb-3">
+              <label class="form-label">Your Name</label>
+
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fa-solid fa-user"></i>
+                </span>
+
+                <input class="form-control"
+                       type="text"
+                       name="visitor_name"
+                       placeholder="Parent / Visitor Name"
+                       required />
+              </div>
+            </div>
+
+            <!-- Captcha -->
+            <div class="mb-3">
+              <label class="form-label">Captcha Verification</label>
+
+              <div class="captcha-box">
+                <div class="captcha-q">
+                  {{ captcha_question }}
+                </div>
+
+                <input class="form-control"
+                       type="text"
+                       name="captcha"
+                       placeholder="Enter answer"
+                       required />
+              </div>
+
+              <div class="text-muted small mt-2">
+                <i class="fa-solid fa-circle-info me-1"></i>
+                Captcha changes every refresh.
+              </div>
+            </div>
+
+            <!-- Button -->
+            <button class="btn btn-primary w-100 btn-glow"
+                    type="submit">
+
+              Continue
+              <i class="fa-solid fa-arrow-right ms-2"></i>
+
+            </button>
+
+          </form>
+
+          <div class="footer-note mt-4">
+            <i class="fa-solid fa-lock me-2"></i>
+            Secure visitor access for enquiry system
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}

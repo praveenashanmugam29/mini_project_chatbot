@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Select College{% endblock %}
+
+{% block head_extra %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/select_college.css') }}" />
+{% endblock %}
+
+{% block body %}
+  <div class="app-shell">
+    {% include "sidebar.html" %}
+
+    <main class="app-main">
+      <div class="container py-4">
+        <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4">
+          <div data-aos="fade-up">
+            <h1 class="page-title mb-1">Choose Your College</h1>
+            <div class="text-muted">Select one college to view details and chat with the enquiry assistant.</div>
+          </div>
+          <a href="{{ url_for('logout') }}" class="btn btn-outline-light" data-aos="fade-left">
+            <i class="fa-solid fa-right-from-bracket me-2"></i>Logout
+          </a>
+        </div>
+
+        <form method="POST" action="{{ url_for('select_college') }}">
+          <div class="row g-4">
+            {% for c in colleges %}
+              <div class="col-md-6 col-xl-3" data-aos="zoom-in" data-aos-delay="{{ loop.index * 60 }}">
+                <button class="college-card glass w-100" type="submit" name="college_id" value="{{ c.id }}">
+                  <div class="college-icon">
+                    {% if c.code == 'ENG' %}
+                      <i class="fa-solid fa-microchip"></i>
+                    {% elif c.code == 'PHARM' %}
+                      <i class="fa-solid fa-capsules"></i>
+                    {% elif c.code == 'NURS' %}
+                      <i class="fa-solid fa-stethoscope"></i>
+                    {% else %}
+                      <i class="fa-solid fa-flask"></i>
+                    {% endif %}
+                  </div>
+                  <div class="college-name">{{ c.short_name }}</div>
+                  <div class="college-full text-muted">{{ c.name }}</div>
+                  <div class="college-cta">
+                    Continue <i class="fa-solid fa-arrow-right ms-2"></i>
+                  </div>
+                </button>
+              </div>
+            {% endfor %}
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+{% endblock %}
+

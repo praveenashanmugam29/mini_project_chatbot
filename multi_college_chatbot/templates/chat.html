@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Chat | {{ college.short_name }}{% endblock %}
+
+{% block head_extra %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}" />
+{% endblock %}
+
+{% block body %}
+  <div class="app-shell">
+    {% include "sidebar.html" %}
+
+    <main class="app-main chat-main">
+      <div class="chat-header glass">
+        <div class="d-flex align-items-center gap-3">
+          <div class="chat-avatar">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div>
+            <div class="chat-title">Enquiry Assistant</div>
+            <div class="chat-sub text-muted small">
+              {{ college.short_name }} • Ask about fees, courses, hostel, placements, admission, scholarships, labs, transport…
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2">
+          <a class="btn btn-outline-light" href="{{ url_for('dashboard') }}">
+            <i class="fa-solid fa-grid-2 me-2"></i>Dashboard
+          </a>
+          <button class="btn btn-outline-light" id="btnSpeak" type="button" title="Voice-like readout (speech synthesis)">
+            <i class="fa-solid fa-volume-high"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="chat-body" id="chatBody">
+        <!-- Bot welcome message -->
+        <div class="msg-row bot">
+          <div class="msg bubble glass">
+            <div class="msg-meta">
+              <span class="name">Assistant</span>
+              <span class="dot"></span>
+              <span class="time">Now</span>
+            </div>
+            <div class="msg-text">
+              Hi {{ session.get('display_name','') }}! Welcome to <b>{{ college.short_name }}</b> enquiry assistant. 
+              Ask me anything about admissions, fees, courses, hostel, placements and more.
+              <div class="mt-2 text-muted small">Try: “What is engineering fees?” • “Tell hostel details” • “show hostel room”</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="suggestions" data-aos="fade-up">
+          <div class="suggestions-title text-muted small mb-2">
+            <i class="fa-solid fa-lightbulb me-2"></i>FAQ Suggestions
+          </div>
+          <div class="chip-row" id="chipRow">
+            {% for s in suggestions %}
+              <button class="chip" type="button" data-chip="{{ s }}">{{ s }}</button>
+            {% endfor %}
+            {% if suggestions|length == 0 %}
+              <button class="chip" type="button" data-chip="Admission process?">Admission process?</button>
+              <button class="chip" type="button" data-chip="Fees structure?">Fees structure?</button>
+              <button class="chip" type="button" data-chip="Hostel facilities?">Hostel facilities?</button>
+              <button class="chip" type="button" data-chip="Placement companies?">Placement companies?</button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input glass">
+        <div class="typing-indicator" id="typingIndicator" hidden>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="ms-2 small text-muted">Assistant is typing…</span>
+        </div>
+        <form id="chatForm" class="d-flex gap-2 align-items-end">
+          <div class="flex-grow-1">
+            <textarea id="chatMessage" class="form-control" rows="1" placeholder="Type your message… (Press Enter to send)"></textarea>
+            <div class="text-muted small mt-1">Tip: type “hostel image” to see hostel rooms.</div>
+          </div>
+          <button class="btn btn-primary btn-send btn-glow" type="submit">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  {% include "enquiry_modal.html" %}
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    window.CHAT_API_URL = "{{ url_for('api_chat') }}";
+    window.ENQUIRY_API_URL = "{{ url_for('api_enquiry') }}";
+  </script>
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/enquiry.js') }}"></script>
+{% endblock %}
+

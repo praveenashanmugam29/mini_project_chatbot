@@ -1,0 +1,100 @@
+/*
+  dashboard.css
+  -------------
+  College welcome dashboard styling with sections and smooth UI.
+*/
+
+.hero{
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: radial-gradient(900px 420px at 15% 40%, rgba(45,125,255,0.25), transparent 60%),
+              radial-gradient(700px 420px at 80% 30%, rgba(0,212,255,0.18), transparent 55%);
+}
+.hero-eyebrow{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.hero-title{
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.metric-card{
+  padding: 18px;
+  display: grid;
+  gap: 6px;
+}
+.metric-icon{
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(45,125,255,0.30), rgba(0,212,255,0.18));
+  border: 1px solid rgba(255,255,255,0.14);
+}
+.metric-value{ font-weight: 900; font-size: 20px; }
+
+.section{
+  margin-top: 26px;
+}
+.section-title h2{
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin-bottom: 2px;
+}
+.section-card{
+  padding: 18px;
+}
+.mini-list{
+  display: grid;
+  gap: 10px;
+}
+.mini-item{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+.mini-item i{
+  width: 20px;
+  text-align: center;
+}
+.course-pill{
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+.chips{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.chip{
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 12px;
+}
+.cta{
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (max-width: 768px){
+  .cta{ flex-direction: column; align-items: flex-start; }
+}
+
