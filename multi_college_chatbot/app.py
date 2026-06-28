@@ -770,10 +770,10 @@ def health():
     except Exception as e:
         return jsonify({"ok": False, "error": str(e)}), 500
 
-if __name__ == "__main__":
-    import webbrowser
-    webbrowser.open("http://127.0.0.1:5000")
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     import webbrowser
+#     webbrowser.open("http://127.0.0.1:5000")
+#     app.run(debug=True)
     
 if __name__ == "__main__":
     # NOTE: debug=True is good for learning; turn off for production.
