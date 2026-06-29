@@ -56,6 +56,11 @@ from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
 
+app = Flask(__name__)
+app.config.from_object(Config)
+
+app.secret_key = "supersecretkey123"  
+
 
 # ------------------------------
 # Database helpers (beginner-friendly)
