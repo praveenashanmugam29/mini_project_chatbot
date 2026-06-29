@@ -504,13 +504,19 @@ def save_chat_history(college_id: int, user_message: str, bot_reply: str):
 # ------------------------------
 # Routes
 # ------------------------------
+
+# @app.route("/")
+# def home():
+#     ensure_session_id()
+#     if session.get("logged_in"):
+#         if session.get("college_id"):
+#             return redirect(url_for("dashboard"))
+#         return redirect(url_for("select_college"))
+#     return redirect(url_for("login"))
+
 @app.route("/")
 def home():
-    ensure_session_id()
-    if session.get("logged_in"):
-        if session.get("college_id"):
-            return redirect(url_for("dashboard"))
-        return redirect(url_for("select_college"))
+    session.clear() 
     return redirect(url_for("login"))
 
 
